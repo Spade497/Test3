@@ -37,14 +37,19 @@ public class DeleteGuest extends AppCompatDialogFragment {
     EditText deleteGuest;
     private String data;
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-    private FirebaseDatabase db = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference = db.getReference("try_list");
-    private DatabaseReference total = db.getReference("Total");
+    private FirebaseDatabase db;
+    private DatabaseReference databaseReference;
+    private DatabaseReference total;
     private ArrayList<String> list = new ArrayList<String>();
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+
+        this.db = QRGenerator.db;
+        this.databaseReference = QRGenerator.databaseReference;
+        this.total = QRGenerator.total;
+        this.list = QRGenerator.list;
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -104,17 +109,6 @@ public class DeleteGuest extends AppCompatDialogFragment {
     }
 
     private void DeleteGuestinRTDB(String data) {
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                list.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren())
-                    list.add((String) dataSnapshot.getValue());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
-        });
 
         list.remove(data);
         databaseReference.setValue(list);

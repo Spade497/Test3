@@ -43,10 +43,10 @@ public class QRGenerator extends AppCompatActivity {
     ImageView qrImg;
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     private String data;
-    private FirebaseDatabase db = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference = db.getReference("try_list");
-    private static DatabaseReference total = FirebaseDatabase.getInstance().getReference("Total");
-    private static ArrayList<String> list = new ArrayList<String>();
+    static FirebaseDatabase db = FirebaseDatabase.getInstance();
+    static DatabaseReference databaseReference = db.getReference("List_user");
+    static DatabaseReference total = FirebaseDatabase.getInstance().getReference("Total");
+    static ArrayList<String> list = new ArrayList<String>();
 
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -137,5 +137,3 @@ public class QRGenerator extends AppCompatActivity {
     }
 
 }
-
-
